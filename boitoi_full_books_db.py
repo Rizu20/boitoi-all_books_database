@@ -70,31 +70,30 @@ def csv_file_write(response_dict_list,csv_headers):
 
 
 
-# def main():
-start_time=datetime.now()
+def main():
+    start_time=datetime.now()
 
-max_book_count=total_book_count()
-print("Total count of books found in boitoi.com : {}. Time taken {} seconds.".format(max_book_count,(datetime.now()-start_time).seconds))
+    max_book_count=total_book_count()
+    print("Total count of books found in boitoi.com : {}. Time taken {} seconds.".format(max_book_count,(datetime.now()-start_time).seconds))
 
-print("Starting individual book info request")
-response_dict_list=[]
-csv_headers=['Book ID','Book Title','Authors Count','Authors','Publisher','Categories','ISBN','Language','Price','Android Price','IOS Price','Discount','Rating','Review Count','Text Review Count','Page Count']
-for book_id in range(1,max_book_count+1):
-    boitoi_response=boitoi_request(book_id)
-    if boitoi_response != None:
-        response_dict={}
-        for i,j in zip(csv_headers,boitoi_response):
-            response_dict[i]=j
-        response_dict_list.append(response_dict)
-print("Total {} books information fetched. Time taken {} seconds.".format(len(response_dict_list),(datetime.now()-start_time).seconds))
+    print("Starting individual book info request")
+    response_dict_list=[]
+    csv_headers=['Book ID','Book Title','Authors Count','Authors','Publisher','Categories','ISBN','Language','Price','Android Price','IOS Price','Discount','Rating','Review Count','Text Review Count','Page Count']
+    for book_id in range(1,max_book_count+1):
+        boitoi_response=boitoi_request(book_id)
+        if boitoi_response != None:
+            response_dict={}
+            for i,j in zip(csv_headers,boitoi_response):
+                response_dict[i]=j
+            response_dict_list.append(response_dict)
+    print("Total {} books information fetched. Time taken {} seconds.".format(len(response_dict_list),(datetime.now()-start_time).seconds))
 
-csv_file_write(response_dict_list,csv_headers)
-print("Response data from API call successfully written to CSV file. Time taken {} seconds.".format((datetime.now()-start_time).seconds))
+    csv_file_write(response_dict_list,csv_headers)
+    print("Response data from API call successfully written to CSV file. Time taken {} seconds.".format((datetime.now()-start_time).seconds))
 
-print("Program complete")
+    print("Program complete")
 
 
-# try:
-#     main()
-# except Exception as e:
-#     print(str(e))
+
+    
+main()
